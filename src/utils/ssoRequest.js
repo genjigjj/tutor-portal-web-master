@@ -5,7 +5,7 @@ import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service2 = axios.create({
-  baseURL: '/api/auth',
+  baseURL: '/api',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -30,14 +30,14 @@ service2.interceptors.response.use(
     return res
   },
   error => {
-    console.log(error.response) // for debug
-    if(error.response.data.message){
-      Message({
-        message: error.response.data.message,
-        type: 'warning',
-        duration: 5 * 1000
-      })
-    }
+    // console.log(error.response) // for debug
+    // if(error.response.data.message){
+    //   Message({
+    //     message: error.response.data.message,
+    //     type: 'warning',
+    //     duration: 5 * 1000
+    //   })
+    // }
     return Promise.reject(error)
   }
 )

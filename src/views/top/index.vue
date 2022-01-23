@@ -3,10 +3,8 @@
     <div class="topDiv">
       <div class="top">
         <div class="left">
-          <img src="@/assets/images/icon-voice.png" />欢迎你的到来到！
+          <img src="@/assets/images/icon-voice.png" />欢迎您的到来！
           <a href="#" class="hover" v-if="isLogin" @click="handleLogout()">【安全退出】</a>&nbsp;
-          <a href="#" class="hover" v-if="!isLogin" @click="handleLogin()">【用户登录】</a>&nbsp;
-          <a href="#" class="hover" v-if="!isLogin" @click="handleReg()">【用户注册】</a>&nbsp;
         </div>
         <div class="right">
           <a v-if="isLogin" @click="$router.push({path:'/center'})" class="user"><img src="@/assets/images/icon-user.png" />个人中心</a>
@@ -111,7 +109,7 @@ export default {
       //const url = `http://www.merryyou.cn/reg.html` //第三方登录时使用
 
       //http://47.115.38.150/
-      const url = `http://localhost:9999/tutor/reg.html`
+      const url = `http://localhost:9999/reg.html`
 
       window.open(url)
     },
