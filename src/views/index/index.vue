@@ -4,7 +4,6 @@
     <top></top>
     <div class="bannerDiv">
       <div class="menuDiv">
-        <img src="@/assets/images/banner.jpg"  alt="image"/>
         <div class="lfmenu">
           <div class="list" v-for="(item,index) in categories">
             <div class="type">
