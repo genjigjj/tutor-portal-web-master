@@ -275,7 +275,15 @@ export default {
   methods: {
 
     handleAddAppoint(){
-      authAppointApi.postForMe(this.needId).then(response=>{
+      authAppointApi.postForMe(this.needId).then(response => {
+        if (response.code) {
+          this.$message({
+            message: response.data.error,
+            type: 'error',
+            duration: 3000
+          })
+          return
+        }
         this.$message({
           message: '预约成功',
           type: 'success',
@@ -289,11 +297,6 @@ export default {
         this.getTeacherPage()
       }).catch(error=>{
         console.log(error.messages)
-        this.$message({
-          message: '预约失败',
-          type: 'warning',
-          duration: 3000
-        })
       })
     },
 
@@ -332,12 +335,11 @@ export default {
 
       authNeedApi.chooseTeacherForNeed(needId,userId).then(response=>{
         loading.close();
-        this.$confirm('跳转到付款页面?', '提示', {
+        this.$confirm('是否提交订单?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          window.open(response)
           this.$message({
             message: '等待付款,请到我的订单中查看',
             type: 'success',
@@ -345,7 +347,7 @@ export default {
           })
         })
       }).catch(error=>{
-        loading.close();
+        loading.close()
       })
   },
 

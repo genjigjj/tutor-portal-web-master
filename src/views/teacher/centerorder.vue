@@ -164,30 +164,35 @@
 
     //继续付款
     pay(id){
-      const loading = this.$loading({
-        lock: true,
-        text: '正在处理,请稍后...',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-
-      authAppointApi.getPayRedirectUrl(id).then(response=>{
-        loading.close()
-        const url = response
-
-        this.$confirm('跳转到付款页面?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(()=>{
-          window.open(url)
-          this.$message({
-            message: '等待付款,付款后请刷新页面',
-            type: 'success',
-            duration: 20000
-          })
+      this.$confirm('是否付款?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: '正在处理,请稍后...',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        authAppointApi.payOrder(id).then(response => {
+          if (response.code) {
+            loading.close()
+            this.$message({
+              message: response.data.error,
+              type: 'error',
+              duration: 2000
+            })
+          } else {
+            loading.close()
+            this.$message({
+              message: '付款成功',
+              type: 'success',
+              duration: 2000
+            })
+          }
+          this.getPage()
         })
-        this.getPage()
       })
     },
 

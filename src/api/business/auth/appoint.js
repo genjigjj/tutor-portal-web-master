@@ -70,9 +70,9 @@ export function studentPage(listQuery) {
 }
 
 // 获取支付宝付款地址
-export function getPayRedirectUrl(appointId) {
+export function payOrder(appointId) {
   return request({
-    url: '/business/auth/appoints/me/'+appointId + '/student/payRedirectUrl',
+    url: '/business/auth/appoints/me/'+appointId + '/student/payOrder',
     method: 'get',
   })
 }

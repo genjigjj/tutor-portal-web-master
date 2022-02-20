@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="selects">
-          <a class="btn" @click="setPlatform('student')">切换为学员端</a>
-          <a class="btn beTeacher" @click="setPlatform('teacher')">切换为教员端</a>
+          <a class="btn" @click="setPlatform('student')" v-if="platform==='teacher'">切换为学员端</a>
+          <a class="btn beTeacher" @click="setPlatform('teacher')" v-if="platform==='student'">切换为教员端</a>
         </div>
       </div>
     </div>
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       areaName: cookieUtil.get('areaName'),
+      platform: cookieUtil.get('platform'),
       navigations:[],
 
       isLogin: false,
