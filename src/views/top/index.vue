@@ -80,13 +80,13 @@ export default {
 
   methods: {
 
-    setPlatform(type){
-      if(type==='student'){
-        cookieUtil.set('platform','student')
-      }else{
-        cookieUtil.set('platform','teacher')
+    setPlatform(type) {
+      if (type === 'student') {
+        cookieUtil.set('platform', 'student')
+      } else {
+        cookieUtil.set('platform', 'teacher')
       }
-      this.$router.go(0)
+      window.location.href = '/'
     },
 
     handleLogin(){
@@ -140,18 +140,20 @@ export default {
 
   created(){
     //导航
-    navigationApi.list().then(response=>{
-      this.navigations = response
-      console.log(response)
-    }).catch(error=>{
-      console.log(error);
+    navigationApi.list({
+      'role': cookieUtil.get('platform')
     })
+      .then(response => {
+        this.navigations = response
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
 
-
-    if(tokenUtils.getToken()){
-      this.isLogin=true
-    }else{
-      this.isLogin=false
+    if (tokenUtils.getToken()) {
+      this.isLogin = true
+    } else {
+      this.isLogin = false
     }
 
   }

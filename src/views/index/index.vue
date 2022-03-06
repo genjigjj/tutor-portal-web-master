@@ -3,6 +3,7 @@
 
     <top></top>
     <div class="bannerDiv">
+      <img src="@/assets/images/banner.jpg"  alt="image" width="100%"/>
       <div class="menuDiv">
         <div class="lfmenu">
           <div class="list" v-for="(item,index) in categories">
@@ -200,7 +201,8 @@ import * as tokenUtils from '@/utils/auth'
 import * as ssoLoginApi from '@/api/ssoLogin'
 
 import { setToken } from '@/utils/auth'
-import { register } from '@/api/ssoLogin'
+
+import Cookies from 'js-cookie'
 
 function array2tree2(source, id, parentId, children) {
   const cloneData = JSON.parse(JSON.stringify(source)) // 对源数据深度克隆
@@ -309,6 +311,7 @@ export default {
         username: this.loginForm.username,
         password: this.loginForm.password
       }).then(response => {
+        Cookies.set('platform', 'student')
         setToken(response.access_token)
         this.$router.push({ path: '/center' })
       }).catch(error => {
